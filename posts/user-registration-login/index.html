@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">User registration and login flow | Notes</title>
+<meta property="og:title" content="User registration and login flow | Notes" />
+<meta name="twitter:title" content="User registration and login flow | Notes" />
+<meta itemprop="name" content="User registration and login flow | Notes" />
+<meta name="application-name" content="User registration and login flow | Notes" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+  <link rel="alternate" hreflang="en" href="https://faza.github.io/notes/posts/user-registration-login/" title="" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-09T10:06:58&#43;0800 />
+    <meta property="article:published_time" content=2024-10-09T10:06:58&#43;0800 />
+    <meta property="og:url" content="https://faza.github.io/notes/posts/user-registration-login/" />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "User registration and login flow",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-09",
+        "description": "",
+        "wordCount":  1045 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-09",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Notes"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.135.0">
+
+    
+    <meta property="og:url" content="https://faza.github.io/notes/posts/user-registration-login/">
+  <meta property="og:site_name" content="Notes">
+  <meta property="og:title" content="User registration and login flow">
+  <meta property="og:description" content="Implementing User Registration in Flask Step 1: Set Up Flask Project Structure Create a new directory for your project:
+mkdir event_registration_app cd event_registration_app Create a virtual environment and activate it:
+python -m venv venv source venv/bin/activate # On Windows, use `venv\Scripts\activate` Install necessary packages:
+pip install flask flask-sqlalchemy flask-login Create the following directory structure:
+event_registration_app/ ├── app/ │ ├── __init__.py │ ├── models.py │ ├── routes.py │ └── templates/ │ ├── base.html │ ├── register.html │ └── login.html └── run.py Step 2: Define the User Model Edit app/models.py:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-09T10:06:58+08:00">
+    <meta property="article:modified_time" content="2024-10-09T10:06:58+08:00">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="User registration and login flow">
+  <meta name="twitter:description" content="Implementing User Registration in Flask Step 1: Set Up Flask Project Structure Create a new directory for your project:
+mkdir event_registration_app cd event_registration_app Create a virtual environment and activate it:
+python -m venv venv source venv/bin/activate # On Windows, use `venv\Scripts\activate` Install necessary packages:
+pip install flask flask-sqlalchemy flask-login Create the following directory structure:
+event_registration_app/ ├── app/ │ ├── __init__.py │ ├── models.py │ ├── routes.py │ └── templates/ │ ├── base.html │ ├── register.html │ └── login.html └── run.py Step 2: Define the User Model Edit app/models.py:">
+
+
+    
+
+    <link rel="canonical" href="https://faza.github.io/notes/posts/user-registration-login/">
+    <link href="/notes/style.min.e390ba7da26222f4dc42a349955d76dbbe44e5ce2535a43de5a70633a0a9ec3c.css" rel="stylesheet">
+    <link href="/notes/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/notes/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/notes/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/notes/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/notes/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/notes/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://faza.github.io/notes/site.webmanifest">
+
+<meta name="msapplication-config" content="/notes/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/notes/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "" class="notransition">
+
+<script src="/notes/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://faza.github.io/notes/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">User registration and login flow</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-09T10:06:58&#43;08:00" itemprop="datePublished"> Oct 9, 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <h1 id="implementing-user-registration-in-flask">Implementing User Registration in Flask</h1>
+<h2 id="step-1-set-up-flask-project-structure">Step 1: Set Up Flask Project Structure</h2>
+<ol>
+<li>
+<p>Create a new directory for your project:</p>
+<pre tabindex="0"><code>mkdir event_registration_app
+cd event_registration_app
+</code></pre></li>
+<li>
+<p>Create a virtual environment and activate it:</p>
+<pre tabindex="0"><code>python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+</code></pre></li>
+<li>
+<p>Install necessary packages:</p>
+<pre tabindex="0"><code>pip install flask flask-sqlalchemy flask-login
+</code></pre></li>
+<li>
+<p>Create the following directory structure:</p>
+<pre tabindex="0"><code>event_registration_app/
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── routes.py
+│   └── templates/
+│       ├── base.html
+│       ├── register.html
+│       └── login.html
+└── run.py
+</code></pre></li>
+</ol>
+<h2 id="step-2-define-the-user-model">Step 2: Define the User Model</h2>
+<p>Edit <code>app/models.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> werkzeug.security <span style="color:#f92672">import</span> generate_password_hash, check_password_hash
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_login <span style="color:#f92672">import</span> UserMixin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>db <span style="color:#f92672">=</span> SQLAlchemy()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span>(UserMixin, db<span style="color:#f92672">.</span>Model):
+</span></span><span style="display:flex;"><span>    id <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Integer, primary_key<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    username <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">64</span>), index<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, unique<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, nullable<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>    email <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">120</span>), index<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, unique<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, nullable<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>    password_hash <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>String(<span style="color:#ae81ff">128</span>), nullable<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_password</span>(self, password):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>password_hash <span style="color:#f92672">=</span> generate_password_hash(password)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_password</span>(self, password):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> check_password_hash(self<span style="color:#f92672">.</span>password_hash, password)
+</span></span></code></pre></div><p>UserMixin is a class provided by Flask-Login that implements default versions of the methods that Flask-Login expects user objects to have.</p>
+<ul>
+<li>It provides default implementations for the methods that Flask-Login expects user objects to have.</li>
+<li>It saves you from having to implement these methods yourself for every user model you create.</li>
+</ul>
+<p><a href="https://github.com/maxcountryman/flask-login/blob/main/src/flask_login/mixins.py">UserMixin</a></p>
+<h2 id="step-3-implement-crud-operations-for-user">Step 3: Implement CRUD Operations for User</h2>
+<p>Add these methods to the <code>User</code> class in <code>app/models.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@classmethod</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_user</span>(cls, username, email, password):
+</span></span><span style="display:flex;"><span>    user <span style="color:#f92672">=</span> cls(username<span style="color:#f92672">=</span>username, email<span style="color:#f92672">=</span>email)
+</span></span><span style="display:flex;"><span>    user<span style="color:#f92672">.</span>set_password(password)
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>add(user)
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@classmethod</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_user_by_username</span>(cls, username):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(username<span style="color:#f92672">=</span>username)<span style="color:#f92672">.</span>first()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@classmethod</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_user_by_email</span>(cls, email):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cls<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(email<span style="color:#f92672">=</span>email)<span style="color:#f92672">.</span>first()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_user</span>(self, username<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, email<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, password<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> username:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>username <span style="color:#f92672">=</span> username
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> email:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>email <span style="color:#f92672">=</span> email
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> password:
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>set_password(password)
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_user</span>(self):
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>delete(self)
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>session<span style="color:#f92672">.</span>commit()
+</span></span></code></pre></div><h3 id="what-is-classmethod-python-decorators">What is @classmethod? Python Decorators</h3>
+<p>Decorators in Python are a way to modify or enhance functions or methods without directly changing their source code. They are a form of metaprogramming, where a part of the program attempts to change another part of the program at compile time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@decorator_function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_function</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p>This is equivalent to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_function</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>some_function <span style="color:#f92672">=</span> decorator_function(some_function)
+</span></span></code></pre></div><h4 id="how-decorators-work">How Decorators Work</h4>
+<ol>
+<li>Decorators are functions that take another function as an argument.</li>
+<li>They usually return a new function that modifies or enhances the behavior of the original function.</li>
+<li>The returned function replaces the original function in the program.</li>
+</ol>
+<h4 id="example-a-simple-decorator">Example: A Simple Decorator</h4>
+<p>Here&rsquo;s a simple decorator that prints a message before and after a function is called:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_decorator</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wrapper</span>():
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Something is happening before the function is called.&#34;</span>)
+</span></span><span style="display:flex;"><span>        func()
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Something is happening after the function is called.&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> wrapper
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@my_decorator</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>say_hello()
+</span></span></code></pre></div><p>Output:</p>
+<pre tabindex="0"><code>Something is happening before the function is called.
+Hello!
+Something is happening after the function is called.
+</code></pre><h4 id="class-methods-and-the-classmethod-decorator">Class Methods and the @classmethod Decorator</h4>
+<p>The <code>@classmethod</code> decorator is used to define methods that are bound to the class and not the instance of the class. They can be called on the class itself, not just on instances of the class.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyClass</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@classmethod</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">class_method</span>(cls):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;This is a class method of </span><span style="color:#e6db74">{</span>cls<span style="color:#f92672">.</span>__name__<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>MyClass<span style="color:#f92672">.</span>class_method()  <span style="color:#75715e"># This works</span>
+</span></span><span style="display:flex;"><span>MyClass()<span style="color:#f92672">.</span>class_method()  <span style="color:#75715e"># This also works</span>
+</span></span></code></pre></div><p>Key points about <code>@classmethod</code>:</p>
+<ol>
+<li>The first parameter is always <code>cls</code> (the class itself), not <code>self</code> (an instance).</li>
+<li>It can be called on the class or an instance of the class.</li>
+<li>It can&rsquo;t access or modify instance-specific data.</li>
+<li>It&rsquo;s often used for alternative constructors or methods that don&rsquo;t need instance-specific data.</li>
+</ol>
+<h4 id="decorators-in-flask">Decorators in Flask</h4>
+<p>Flask uses decorators extensively. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">home</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello, World!&#34;</span>
+</span></span></code></pre></div><p>This <code>@app.route</code> decorator tells Flask what URL should trigger the <code>home</code> function.</p>
+<h2 id="step-4-write-html-templates">Step 4: Write HTML Templates</h2>
+<p>Create <code>app/templates/base.html</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;{% block title %}Event Registration App{% endblock %}&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">nav</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;index&#39;) }}&#34;</span>&gt;Home&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;register&#39;) }}&#34;</span>&gt;Register&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;login&#39;) }}&#34;</span>&gt;Login&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">nav</span>&gt;
+</span></span><span style="display:flex;"><span>    {% with messages = get_flashed_messages() %}
+</span></span><span style="display:flex;"><span>        {% if messages %}
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#f92672">ul</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;flashes&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>                {% for message in messages %}
+</span></span><span style="display:flex;"><span>                    &lt;<span style="color:#f92672">li</span>&gt;{{ message }}&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>                {% endfor %}
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>        {% endif %}
+</span></span><span style="display:flex;"><span>    {% endwith %}
+</span></span><span style="display:flex;"><span>    {% block content %}{% endblock %}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p>Create <code>app/templates/register.html</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#34;base.html&#34; %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block title %}Register{% endblock %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block content %}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">h2</span>&gt;Register&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;POST&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span>&gt;Username:&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span> <span style="color:#a6e22e">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span>&gt;Email:&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span> <span style="color:#a6e22e">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span>&gt;Password:&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Register&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><p>Create <code>app/templates/login.html</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#34;base.html&#34; %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block title %}Login{% endblock %}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{% block content %}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">h2</span>&gt;Login&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;POST&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span>&gt;Username:&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;username&#34;</span> <span style="color:#a6e22e">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">label</span> <span style="color:#a6e22e">for</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span>&gt;Password:&lt;/<span style="color:#f92672">label</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#a6e22e">required</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Login&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><h2 id="step-5-implement-register-and-login-routes">Step 5: Implement Register and Login Routes</h2>
+<p>Edit <code>app/routes.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> render_template, redirect, url_for, flash, request
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_login <span style="color:#f92672">import</span> login_user, login_required, logout_user
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> app <span style="color:#f92672">import</span> db
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> app.models <span style="color:#f92672">import</span> User
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;base.html&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        username <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;username&#39;</span>)
+</span></span><span style="display:flex;"><span>        email <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;email&#39;</span>)
+</span></span><span style="display:flex;"><span>        password <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;password&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> User<span style="color:#f92672">.</span>get_user_by_username(username):
+</span></span><span style="display:flex;"><span>            flash(<span style="color:#e6db74">&#39;Username already exists&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;register&#39;</span>))
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> User<span style="color:#f92672">.</span>get_user_by_email(email):
+</span></span><span style="display:flex;"><span>            flash(<span style="color:#e6db74">&#39;Email already exists&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;register&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        user <span style="color:#f92672">=</span> User<span style="color:#f92672">.</span>create_user(username, email, password)
+</span></span><span style="display:flex;"><span>        flash(<span style="color:#e6db74">&#39;Registration successful&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;login&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;register.html&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">login</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
+</span></span><span style="display:flex;"><span>        username <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;username&#39;</span>)
+</span></span><span style="display:flex;"><span>        password <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;password&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        user <span style="color:#f92672">=</span> User<span style="color:#f92672">.</span>get_user_by_username(username)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> user <span style="color:#f92672">and</span> user<span style="color:#f92672">.</span>check_password(password):
+</span></span><span style="display:flex;"><span>            login_user(user)
+</span></span><span style="display:flex;"><span>            flash(<span style="color:#e6db74">&#39;Logged in successfully&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;index&#39;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            flash(<span style="color:#e6db74">&#39;Invalid username or password&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;login.html&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@login_required</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">logout</span>():
+</span></span><span style="display:flex;"><span>    logout_user()
+</span></span><span style="display:flex;"><span>    flash(<span style="color:#e6db74">&#39;Logged out successfully&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;index&#39;</span>))
+</span></span></code></pre></div><h2 id="step-6-set-up-the-flask-application">Step 6: Set Up the Flask Application</h2>
+<p>Edit <code>app/__init__.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemy
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_login <span style="color:#f92672">import</span> LoginManager
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> app.models <span style="color:#f92672">import</span> db, User
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+</span></span><span style="display:flex;"><span>    app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SECRET_KEY&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;your-secret-key&#39;</span>  <span style="color:#75715e"># Change this!</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SQLALCHEMY_DATABASE_URI&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;sqlite:///event_registration.db&#39;</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    db<span style="color:#f92672">.</span>init_app(app)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    login_manager <span style="color:#f92672">=</span> LoginManager()
+</span></span><span style="display:flex;"><span>    login_manager<span style="color:#f92672">.</span>login_view <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;login&#39;</span>
+</span></span><span style="display:flex;"><span>    login_manager<span style="color:#f92672">.</span>init_app(app)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@login_manager.user_loader</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_user</span>(user_id):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> User<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>get(int(user_id))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> app <span style="color:#f92672">import</span> routes
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/&#39;</span>, <span style="color:#e6db74">&#39;index&#39;</span>, routes<span style="color:#f92672">.</span>index)
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/register&#39;</span>, <span style="color:#e6db74">&#39;register&#39;</span>, routes<span style="color:#f92672">.</span>register, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/login&#39;</span>, <span style="color:#e6db74">&#39;login&#39;</span>, routes<span style="color:#f92672">.</span>login, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/logout&#39;</span>, <span style="color:#e6db74">&#39;logout&#39;</span>, routes<span style="color:#f92672">.</span>logout)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> app
+</span></span></code></pre></div><h2 id="step-7-create-the-entry-point">Step 7: Create the Entry Point</h2>
+<p>Edit <code>run.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> app <span style="color:#f92672">import</span> create_app, db
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> create_app()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> app<span style="color:#f92672">.</span>app_context():
+</span></span><span style="display:flex;"><span>        db<span style="color:#f92672">.</span>create_all()
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>run(debug<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><h2 id="step-8-run-the-application">Step 8: Run the Application</h2>
+<p>Now you can run your application:</p>
+<pre tabindex="0"><code>python run.py
+</code></pre><p>This will start your Flask development server, and you should be able to access your application at <code>http://localhost:5000</code>.</p>
+<p>You now have a basic Flask application with user registration and login functionality. Users can register, log in, and log out. The application uses SQLAlchemy for database operations and Flask-Login for session management.</p>
+<p>Next steps could include adding more features like creating events, registering for events, and implementing admin functionality.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+</div>
+    <small class="footer_copyright">
+        © 2024 .
+        
+    </small>
+</footer>
+
+
+
+
+
+
+
+    
+    <script src="https://faza.github.io/notes/js/main.min.4ee188e1744c19816e95a540b2650ed9f033ea0371e74eac8e717355cfca8741.js" integrity="sha256-TuGI4XRMGYFulaVAsmUO2fAz6gNx506sjnFzVc/Kh0E="></script>
+
+    
+
+</body>
+</html>
