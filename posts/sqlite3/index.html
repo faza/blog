@@ -3,11 +3,11 @@
 <meta http-equiv="content-type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title itemprop="name">Posts | Notes</title>
-<meta property="og:title" content="Posts | Notes" />
-<meta name="twitter:title" content="Posts | Notes" />
-<meta itemprop="name" content="Posts | Notes" />
-<meta name="application-name" content="Posts | Notes" />
+<title itemprop="name">Sqlite3 | Notes</title>
+<meta property="og:title" content="Sqlite3 | Notes" />
+<meta name="twitter:title" content="Sqlite3 | Notes" />
+<meta itemprop="name" content="Sqlite3 | Notes" />
+<meta name="application-name" content="Sqlite3 | Notes" />
 <meta property="og:site_name" content="" />
 
 <meta name="description" content="">
@@ -18,20 +18,12 @@
 <meta property="og:locale" content="en-us" />
 <meta name="language" content="en-us" />
 
-  <link rel="alternate" hreflang="en" href="https://faza.github.io/notes/posts/" title="" />
+  <link rel="alternate" hreflang="en" href="https://faza.github.io/notes/posts/sqlite3/" title="" />
 
 
 
 
 
-    
-    
-    
-    
-    
-    <link rel="first" href="/notes/posts/" />
-    <link rel="last" href="/notes/posts/" />
-    
     
     
     
@@ -39,7 +31,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2024-10-11T13:37:43&#43;0800 />
     <meta property="article:published_time" content=2024-10-11T13:37:43&#43;0800 />
-    <meta property="og:url" content="https://faza.github.io/notes/posts/" />
+    <meta property="og:url" content="https://faza.github.io/notes/posts/sqlite3/" />
 
     
 
@@ -49,14 +41,14 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "Posts",
+        "headline": "Sqlite3",
         "author": {
         "@type": "Person",
         "name": ""
         },
         "datePublished": "2024-10-11",
         "description": "",
-        "wordCount":  0 ,
+        "wordCount":  150 ,
         "mainEntityOfPage": "True",
         "dateModified": "2024-10-11",
         "image": {
@@ -74,24 +66,41 @@
 <meta name="generator" content="Hugo 0.135.0">
 
     
-    <meta property="og:url" content="https://faza.github.io/notes/posts/">
+    <meta property="og:url" content="https://faza.github.io/notes/posts/sqlite3/">
   <meta property="og:site_name" content="Notes">
-  <meta property="og:title" content="Posts">
+  <meta property="og:title" content="Sqlite3">
+  <meta property="og:description" content="Viewing Your SQLite Database with the Command Line SQLite comes with a handy command-line tool that allows you to interact with your database directly. Here’s a quick guide on how to use it:
+Open your terminal and navigate to your project directory.
+Start the SQLite CLI by running:
+sqlite3 instance/event_registration.db Once in the SQLite prompt, you can:
+List all tables:
+.tables Example output:
+sqlite&gt; .tables event user View table schema:
+.schema user .schema event Example output:">
   <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-11T13:37:43+08:00">
+    <meta property="article:modified_time" content="2024-10-11T13:37:43+08:00">
 
 
     
     
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Posts">
+  <meta name="twitter:title" content="Sqlite3">
+  <meta name="twitter:description" content="Viewing Your SQLite Database with the Command Line SQLite comes with a handy command-line tool that allows you to interact with your database directly. Here’s a quick guide on how to use it:
+Open your terminal and navigate to your project directory.
+Start the SQLite CLI by running:
+sqlite3 instance/event_registration.db Once in the SQLite prompt, you can:
+List all tables:
+.tables Example output:
+sqlite&gt; .tables event user View table schema:
+.schema user .schema event Example output:">
 
 
     
 
-    <link rel="canonical" href="https://faza.github.io/notes/posts/">
-    <link href="/notes/posts/index.xml" rel="alternate" type="application/rss+xml" title="Notes">
-    <link href="/notes/posts/index.xml" rel="feed" type="application/rss+xml" title="Notes">
+    <link rel="canonical" href="https://faza.github.io/notes/posts/sqlite3/">
     <link href="/notes/style.min.e390ba7da26222f4dc42a349955d76dbbe44e5ce2535a43de5a70633a0a9ec3c.css" rel="stylesheet">
     <link href="/notes/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
@@ -157,91 +166,80 @@ stroke-linejoin="round" class="feather feather-home">
         </div>
     </nav>
 </div>
-<div class="wrapper list-page">
-    <header class="header">
-        <h1 class="header-title center">Posts</h1>
-    </header>
+
+<div class="wrapper post">
     <main class="page-content" aria-label="Content">
-        
-        
-        <h2 class="post-year">2024</h2>
+        <article>
+            <header class="header">
+                <h1 class="header-title">Sqlite3</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-11T13:37:43&#43;08:00" itemprop="datePublished"> Oct 11, 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <h1 id="viewing-your-sqlite-database-with-the-command-line">Viewing Your SQLite Database with the Command Line</h1>
+<p>SQLite comes with a handy command-line tool that allows you to interact with your database directly. Here&rsquo;s a quick guide on how to use it:</p>
+<ol>
+<li>
+<p>Open your terminal and navigate to your project directory.</p>
+</li>
+<li>
+<p>Start the SQLite CLI by running:</p>
+<pre tabindex="0"><code>sqlite3 instance/event_registration.db
+</code></pre></li>
+<li>
+<p>Once in the SQLite prompt, you can:</p>
+<ul>
+<li>
+<p>List all tables:</p>
+<pre tabindex="0"><code>.tables
+</code></pre><p>Example output:</p>
+<pre tabindex="0"><code>sqlite&gt; .tables
+event  user
+</code></pre></li>
+<li>
+<p>View table schema:</p>
+<pre tabindex="0"><code>.schema user
+.schema event
+</code></pre><p>Example output:</p>
+<pre tabindex="0"><code>sqlite&gt; .schema user
+CREATE TABLE user (
+        id INTEGER NOT NULL, 
+        username VARCHAR(64) NOT NULL, 
+        email VARCHAR(120) NOT NULL, 
+        password_hash VARCHAR(128) NOT NULL, 
+        PRIMARY KEY (id)
+);
+CREATE UNIQUE INDEX ix_user_email ON user (email);
+CREATE UNIQUE INDEX ix_user_username ON user (username);
+</code></pre></li>
+<li>
+<p>Query data:</p>
+<pre tabindex="0"><code>SELECT * FROM user;
+SELECT * FROM event;
+</code></pre><p>Example output:</p>
+<pre tabindex="0"><code>sqlite&gt; SELECT * FROM user;
+1|test|test@test.com|scrypt:32768:8:1$5lDW7RlS48dXfzhH$26549216036b3fa8b784482875c9c99ae0e8d07599fc9ff1be2511ed9e2687a199cbbd2bdb8c64d1f81b9a02931ca3aa2f1d52b6c95969d0e76787b0e0ce3744
+2|test1|test1@test.com|scrypt:32768:8:1$COQEdu1J1szD1F9I$4a27938cb177073d9aca1df356b1bd6fc286cfafac2220c891273ba9d0178470701bdf1e303e305c0244a203b99fa5093ff131826eb39c709d431639e0280dd1
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>To exit the SQLite CLI, type:</p>
+<pre tabindex="0"><code>.quit
+</code></pre></li>
+</ol>
+<p>Remember, SQLite commands end with a semicolon.</p>
 
-        
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/notes/posts/sqlite3/">Sqlite3</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2024-10-11T13:37:43&#43;0800">
-        11 Oct 2024
-        
-    </time>
-</article>
-
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/notes/posts/events/">Events</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2024-10-10T19:32:36&#43;0800">
-        10 Oct 2024
-        
-    </time>
-</article>
-
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/notes/posts/flask-login/">Flask Login</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2024-10-09T10:33:36&#43;0800">
-        9 Oct 2024
-        
-    </time>
-</article>
-
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/notes/posts/user-registration-login/">User registration and login flow</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2024-10-09T10:06:58&#43;0800">
-        9 Oct 2024
-        
-    </time>
-</article>
-
-
-         
-
-         
-
-    </main>
-</div><footer class="footer">
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
     <span class="footer_item"> </span>
     &nbsp;
 

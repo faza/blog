@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Flask Login | Notes</title>
+<meta property="og:title" content="Flask Login | Notes" />
+<meta name="twitter:title" content="Flask Login | Notes" />
+<meta itemprop="name" content="Flask Login | Notes" />
+<meta name="application-name" content="Flask Login | Notes" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+  <link rel="alternate" hreflang="en" href="https://faza.github.io/notes/posts/flask-login/" title="" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-09T10:33:36&#43;0800 />
+    <meta property="article:published_time" content=2024-10-09T10:33:36&#43;0800 />
+    <meta property="og:url" content="https://faza.github.io/notes/posts/flask-login/" />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Flask Login",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-09",
+        "description": "",
+        "wordCount":  504 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-09",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Notes"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.135.0">
+
+    
+    <meta property="og:url" content="https://faza.github.io/notes/posts/flask-login/">
+  <meta property="og:site_name" content="Notes">
+  <meta property="og:title" content="Flask Login">
+  <meta property="og:description" content="How Flask-Login Works Behind the Scenes Flask-Login is an extension for Flask that manages user session management. It handles the common tasks of logging in, logging out, and remembering users’ sessions over extended periods. Here’s a breakdown of its key components and processes:
+1. User Model Flask-Login requires that your User model implement certain properties and methods:
+is_authenticated: True if the user has valid credentials is_active: True if the user’s account is active is_anonymous: False for regular users get_id(): Returns a unique identifier for the user These are typically implemented by inheriting from UserMixin.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-09T10:33:36+08:00">
+    <meta property="article:modified_time" content="2024-10-09T10:33:36+08:00">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flask Login">
+  <meta name="twitter:description" content="How Flask-Login Works Behind the Scenes Flask-Login is an extension for Flask that manages user session management. It handles the common tasks of logging in, logging out, and remembering users’ sessions over extended periods. Here’s a breakdown of its key components and processes:
+1. User Model Flask-Login requires that your User model implement certain properties and methods:
+is_authenticated: True if the user has valid credentials is_active: True if the user’s account is active is_anonymous: False for regular users get_id(): Returns a unique identifier for the user These are typically implemented by inheriting from UserMixin.">
+
+
+    
+
+    <link rel="canonical" href="https://faza.github.io/notes/posts/flask-login/">
+    <link href="/notes/style.min.e390ba7da26222f4dc42a349955d76dbbe44e5ce2535a43de5a70633a0a9ec3c.css" rel="stylesheet">
+    <link href="/notes/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/notes/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/notes/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/notes/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/notes/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/notes/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://faza.github.io/notes/site.webmanifest">
+
+<meta name="msapplication-config" content="/notes/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/notes/icons/favicon.svg">
+
+    
+    </head>
+<body data-theme = "" class="notransition">
+
+<script src="/notes/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://faza.github.io/notes/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Flask Login</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-09T10:33:36&#43;08:00" itemprop="datePublished"> Oct 9, 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <h1 id="how-flask-login-works-behind-the-scenes">How Flask-Login Works Behind the Scenes</h1>
+<p>Flask-Login is an extension for Flask that manages user session management. It handles the common tasks of logging in, logging out, and remembering users&rsquo; sessions over extended periods. Here&rsquo;s a breakdown of its key components and processes:</p>
+<p><img src="/notes/images/session.png" alt="session"></p>
+<h2 id="1-user-model">1. User Model</h2>
+<p>Flask-Login requires that your User model implement certain properties and methods:</p>
+<ul>
+<li><code>is_authenticated</code>: True if the user has valid credentials</li>
+<li><code>is_active</code>: True if the user&rsquo;s account is active</li>
+<li><code>is_anonymous</code>: False for regular users</li>
+<li><code>get_id()</code>: Returns a unique identifier for the user</li>
+</ul>
+<p>These are typically implemented by inheriting from <code>UserMixin</code>.</p>
+<h2 id="2-loginmanager">2. LoginManager</h2>
+<p>This is the core class of Flask-Login. It manages the login process and integrates with your Flask application.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>login_manager <span style="color:#f92672">=</span> LoginManager()
+</span></span><span style="display:flex;"><span>login_manager<span style="color:#f92672">.</span>init_app(app)
+</span></span></code></pre></div><h2 id="3-user-loader">3. User Loader</h2>
+<p>You define a user loader function that loads a user from your database based on their ID:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@login_manager.user_loader</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">load_user</span>(user_id):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> User<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>get(int(user_id))
+</span></span></code></pre></div><h2 id="4-session-management">4. Session Management</h2>
+<p>Flask-Login uses Flask&rsquo;s session to store the ID of the logged-in user. Here&rsquo;s what happens:</p>
+<ul>
+<li>When a user logs in, Flask-Login sets <code>session['user_id']</code> to the user&rsquo;s unique identifier.</li>
+<li>On subsequent requests, Flask-Login checks for <code>user_id</code> in the session.</li>
+<li>If found, it calls your user loader function to load the user object.</li>
+<li>The loaded user object is then stored in the <code>flask.g</code> object for the duration of the request.</li>
+</ul>
+<h2 id="5-login_required-decorator">5. @login_required Decorator</h2>
+<p>This decorator checks if a user is logged in before allowing access to a view:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/protected&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@login_required</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">protected</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;This is a protected view&#34;</span>
+</span></span></code></pre></div><p>Behind the scenes:</p>
+<ul>
+<li>It checks if there&rsquo;s a user in <code>flask.g</code>.</li>
+<li>If not, it redirects to the login page (configurable via <code>login_manager.login_view</code>).</li>
+</ul>
+<h2 id="6-current-user">6. Current User</h2>
+<p>Flask-Login provides a <code>current_user</code> proxy, which is either the logged-in user object or an <code>AnonymousUser</code> instance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_login <span style="color:#f92672">import</span> current_user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> current_user<span style="color:#f92672">.</span>is_authenticated:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">{</span>current_user<span style="color:#f92672">.</span>username<span style="color:#e6db74">}</span><span style="color:#e6db74">!&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Hello, Guest!&#34;</span>
+</span></span></code></pre></div><p><code>current_user</code> is implemented using LocalProxy, which looks up the user in <code>flask.g</code> for each request.</p>
+<h2 id="7-remember-me-functionality">7. Remember Me Functionality</h2>
+<p>Flask-Login can &ldquo;remember&rdquo; users across sessions:</p>
+<ul>
+<li>When logging in with &ldquo;remember me&rdquo;, Flask-Login sets a long-term cookie with a remember token.</li>
+<li>On subsequent visits, if the session has expired, Flask-Login checks for this cookie.</li>
+<li>If found and valid, the user is logged in automatically.</li>
+</ul>
+<h2 id="8-security-features">8. Security Features</h2>
+<ul>
+<li>Flask-Login implements protection against session hijacking by changing the session ID when users log in.</li>
+<li>It provides hooks to customize behavior on events like login, logout, and unauthorized access.</li>
+</ul>
+<h2 id="9-login-process">9. Login Process</h2>
+<p>When you call <code>login_user(user)</code>:</p>
+<ol>
+<li>The user ID is stored in the session.</li>
+<li>The session is marked as &ldquo;fresh&rdquo; (important for sensitive operations).</li>
+<li>If &ldquo;remember me&rdquo; is used, a long-term remember token is set.</li>
+<li>The <code>user_logged_in</code> signal is sent.</li>
+</ol>
+<h2 id="10-logout-process">10. Logout Process</h2>
+<p>When you call <code>logout_user()</code>:</p>
+<ol>
+<li>The user ID is removed from the session.</li>
+<li>The remember token is cleared (if it exists).</li>
+<li>The <code>user_logged_out</code> signal is sent.</li>
+<li>Flask-Login forgets the contents of <code>flask.g</code>.</li>
+</ol>
+<p>Understanding these mechanisms helps in implementing secure and efficient user authentication in Flask applications. Flask-Login abstracts away many of the complexities, but knowing what&rsquo;s happening under the hood can be crucial for debugging and customization.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+</div>
+    <small class="footer_copyright">
+        © 2024 .
+        
+    </small>
+</footer>
+
+
+
+
+
+
+
+    
+    <script src="https://faza.github.io/notes/js/main.min.4ee188e1744c19816e95a540b2650ed9f033ea0371e74eac8e717355cfca8741.js" integrity="sha256-TuGI4XRMGYFulaVAsmUO2fAz6gNx506sjnFzVc/Kh0E="></script>
+
+    
+
+</body>
+</html>
