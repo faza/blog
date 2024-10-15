@@ -6,7 +6,53 @@
     <description>Recent content on Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2024 13:37:43 +0800</lastBuildDate><atom:link href="https://faza.github.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Oct 2024 12:22:38 +0800</lastBuildDate><atom:link href="https://faza.github.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event Registration</title>
+      <link>https://faza.github.io/notes/posts/event-registration/</link>
+      <pubDate>Tue, 15 Oct 2024 12:22:38 +0800</pubDate>
+      
+      <guid>https://faza.github.io/notes/posts/event-registration/</guid>
+      
+      <description>&lt;hr&gt;
+&lt;h1 id=&#34;event-registration&#34;&gt;Event Registration&lt;/h1&gt;
+&lt;h2 id=&#34;1-implement-event-registration-functionality&#34;&gt;1. Implement Event Registration Functionality&lt;/h2&gt;
+&lt;h3 id=&#34;step-1-update-event-model&#34;&gt;Step 1: Update Event Model&lt;/h3&gt;
+&lt;p&gt;Add a relationship to track registrations:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# In app/models.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; flask_login &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; UserMixin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Event&lt;/span&gt;(db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Model):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# ... existing fields ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    attendees &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;relationship(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;User&amp;#39;&lt;/span&gt;, secondary&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;registrations&amp;#39;&lt;/span&gt;, backref&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;backref(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;attended_events&amp;#39;&lt;/span&gt;, lazy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;dynamic&amp;#39;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Registration&lt;/span&gt;(db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Model):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __tablename__ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;registrations&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    user_id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Column(db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Integer, db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ForeignKey(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;user.id&amp;#39;&lt;/span&gt;), primary_key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    event_id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Column(db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Integer, db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ForeignKey(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;event.id&amp;#39;&lt;/span&gt;), primary_key&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    registration_date &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Column(db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;DateTime, default&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;utcnow)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;step-2-add-registration-route&#34;&gt;Step 2: Add Registration Route&lt;/h3&gt;
+&lt;p&gt;Create a new route to handle event registration:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# In app/routes.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; flask_login &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; login_required, current_user
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; app.models &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Event, Registration
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@login_required&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;register_for_event&lt;/span&gt;(event_id):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    event &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Event&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;query&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_or_404(event_id)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; current_user &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; event&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;attendees:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        registration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Registration(user_id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;current_user&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;id, event_id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;event&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;id)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;session&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;add(registration)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        db&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;session&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;commit()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        flash(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;You have successfully registered for this event!&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        flash(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;You are already registered for this event.&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;info&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; redirect(url_for(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;event_details&amp;#39;&lt;/span&gt;, event_id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;event_id))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;step-3-update-event-details-template&#34;&gt;Step 3: Update Event Details Template&lt;/h3&gt;
+&lt;p&gt;Add a registration button to the event details page:&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>Sqlite3</title>
       <link>https://faza.github.io/notes/posts/sqlite3/</link>
