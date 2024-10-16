@@ -48,7 +48,7 @@
         },
         "datePublished": "2024-10-15",
         "description": "",
-        "wordCount":  458 ,
+        "wordCount":  559 ,
         "mainEntityOfPage": "True",
         "dateModified": "2024-10-15",
         "image": {
@@ -70,8 +70,7 @@
   <meta property="og:site_name" content="Notes">
   <meta property="og:title" content="Event Registration">
   <meta property="og:description" content=" Event Registration 1. Implement Event Registration Functionality Step 1: Update Event Model Add a relationship to track registrations:
-# In app/models.py from flask_login import UserMixin class Event(db.Model): # ... existing fields ... attendees = db.relationship(&#39;User&#39;, secondary=&#39;registrations&#39;, backref=db.backref(&#39;attended_events&#39;, lazy=&#39;dynamic&#39;)) class Registration(db.Model): __tablename__ = &#39;registrations&#39; user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), primary_key=True) event_id = db.Column(db.Integer, db.ForeignKey(&#39;event.id&#39;), primary_key=True) registration_date = db.Column(db.DateTime, default=datetime.utcnow) Step 2: Add Registration Route Create a new route to handle event registration:
-# In app/routes.py from flask_login import login_required, current_user from app.models import Event, Registration @login_required def register_for_event(event_id): event = Event.query.get_or_404(event_id) if current_user not in event.attendees: registration = Registration(user_id=current_user.id, event_id=event.id) db.session.add(registration) db.session.commit() flash(&#39;You have successfully registered for this event!&#39;, &#39;success&#39;) else: flash(&#39;You are already registered for this event.&#39;, &#39;info&#39;) return redirect(url_for(&#39;event_details&#39;, event_id=event_id)) Step 3: Update Event Details Template Add a registration button to the event details page:">
+# In app/models.py from flask_login import UserMixin import datetime class Event(db.Model): # ... existing fields ... attendees = db.relationship(&#39;User&#39;, secondary=&#39;registrations&#39;, backref=db.backref(&#39;attended_events&#39;, lazy=&#39;dynamic&#39;)) class Registration(db.Model): __tablename__ = &#39;registrations&#39; user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), primary_key=True) event_id = db.Column(db.Integer, db.ForeignKey(&#39;event.id&#39;), primary_key=True) registration_date = db.Column(db.DateTime, default=datetime.datetime.utcnow()) Step 2: Add Registration Route Create a new route to handle event registration:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -84,8 +83,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Event Registration">
   <meta name="twitter:description" content=" Event Registration 1. Implement Event Registration Functionality Step 1: Update Event Model Add a relationship to track registrations:
-# In app/models.py from flask_login import UserMixin class Event(db.Model): # ... existing fields ... attendees = db.relationship(&#39;User&#39;, secondary=&#39;registrations&#39;, backref=db.backref(&#39;attended_events&#39;, lazy=&#39;dynamic&#39;)) class Registration(db.Model): __tablename__ = &#39;registrations&#39; user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), primary_key=True) event_id = db.Column(db.Integer, db.ForeignKey(&#39;event.id&#39;), primary_key=True) registration_date = db.Column(db.DateTime, default=datetime.utcnow) Step 2: Add Registration Route Create a new route to handle event registration:
-# In app/routes.py from flask_login import login_required, current_user from app.models import Event, Registration @login_required def register_for_event(event_id): event = Event.query.get_or_404(event_id) if current_user not in event.attendees: registration = Registration(user_id=current_user.id, event_id=event.id) db.session.add(registration) db.session.commit() flash(&#39;You have successfully registered for this event!&#39;, &#39;success&#39;) else: flash(&#39;You are already registered for this event.&#39;, &#39;info&#39;) return redirect(url_for(&#39;event_details&#39;, event_id=event_id)) Step 3: Update Event Details Template Add a registration button to the event details page:">
+# In app/models.py from flask_login import UserMixin import datetime class Event(db.Model): # ... existing fields ... attendees = db.relationship(&#39;User&#39;, secondary=&#39;registrations&#39;, backref=db.backref(&#39;attended_events&#39;, lazy=&#39;dynamic&#39;)) class Registration(db.Model): __tablename__ = &#39;registrations&#39; user_id = db.Column(db.Integer, db.ForeignKey(&#39;user.id&#39;), primary_key=True) event_id = db.Column(db.Integer, db.ForeignKey(&#39;event.id&#39;), primary_key=True) registration_date = db.Column(db.DateTime, default=datetime.datetime.utcnow()) Step 2: Add Registration Route Create a new route to handle event registration:">
 
 
     
@@ -179,6 +177,7 @@ stroke-linejoin="round" class="feather feather-home">
 <p>Add a relationship to track registrations:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/models.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask_login <span style="color:#f92672">import</span> UserMixin
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> datetime
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Event</span>(db<span style="color:#f92672">.</span>Model):
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... existing fields ...</span>
@@ -188,7 +187,7 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span style="display:flex;"><span>    __tablename__ <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;registrations&#39;</span>
 </span></span><span style="display:flex;"><span>    user_id <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Integer, db<span style="color:#f92672">.</span>ForeignKey(<span style="color:#e6db74">&#39;user.id&#39;</span>), primary_key<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 </span></span><span style="display:flex;"><span>    event_id <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>Integer, db<span style="color:#f92672">.</span>ForeignKey(<span style="color:#e6db74">&#39;event.id&#39;</span>), primary_key<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>    registration_date <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>DateTime, default<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>utcnow)
+</span></span><span style="display:flex;"><span>    registration_date <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>Column(db<span style="color:#f92672">.</span>DateTime, default<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>utcnow())
 </span></span></code></pre></div><h3 id="step-2-add-registration-route">Step 2: Add Registration Route</h3>
 <p>Create a new route to handle event registration:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/routes.py</span>
@@ -206,7 +205,16 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>        flash(<span style="color:#e6db74">&#39;You are already registered for this event.&#39;</span>, <span style="color:#e6db74">&#39;info&#39;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> redirect(url_for(<span style="color:#e6db74">&#39;event_details&#39;</span>, event_id<span style="color:#f92672">=</span>event_id))
-</span></span></code></pre></div><h3 id="step-3-update-event-details-template">Step 3: Update Event Details Template</h3>
+</span></span></code></pre></div><h3 id="step-3-register-the-new-route-in-the-flask-app">Step 3: Register the new route in the flask app</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/__init__.py</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... (previous code remains the same)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># just add this line</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/register_for_event/&lt;int:event_id&gt;&#39;</span>, <span style="color:#e6db74">&#39;register_for_event&#39;</span>, routes<span style="color:#f92672">.</span>register_for_event, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> app
+</span></span></code></pre></div><h3 id="step-4-update-event-details-template">Step 4: Update Event Details Template</h3>
 <p>Add a registration button to the event details page:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- In app/templates/event_details.html --&gt;</span>
 </span></span><span style="display:flex;"><span>{% if current_user.is_authenticated %}
@@ -227,7 +235,16 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span style="display:flex;"><span>    created_events <span style="color:#f92672">=</span> Event<span style="color:#f92672">.</span>query<span style="color:#f92672">.</span>filter_by(organizer_id<span style="color:#f92672">=</span>current_user<span style="color:#f92672">.</span>id)<span style="color:#f92672">.</span>all()
 </span></span><span style="display:flex;"><span>    registered_events <span style="color:#f92672">=</span> current_user<span style="color:#f92672">.</span>attended_events<span style="color:#f92672">.</span>all()
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;dashboard.html&#39;</span>, created_events<span style="color:#f92672">=</span>created_events, registered_events<span style="color:#f92672">=</span>registered_events)
-</span></span></code></pre></div><h3 id="step-2-create-dashboard-template">Step 2: Create Dashboard Template</h3>
+</span></span></code></pre></div><h3 id="step-2-register-the-new-route-in-the-flask-app">Step 2: Register the new route in the flask app</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/__init__.py</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... (previous code remains the same)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># just add this line</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/home&#39;</span>, <span style="color:#e6db74">&#39;home&#39;</span>, routes<span style="color:#f92672">.</span>dashboard)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> app
+</span></span></code></pre></div><h3 id="step-3-create-dashboard-template">Step 3: Create Dashboard Template</h3>
 <p>Create a new template for the user dashboard:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- In app/templates/dashboard.html --&gt;</span>
 </span></span><span style="display:flex;"><span>{% extends &#34;base.html&#34; %}
@@ -255,7 +272,6 @@ stroke-linejoin="round" class="feather feather-home">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/routes.py</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sqlalchemy <span style="color:#f92672">import</span> or_
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/search&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">search_events</span>():
 </span></span><span style="display:flex;"><span>    query <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;query&#39;</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> query:
@@ -267,14 +283,23 @@ stroke-linejoin="round" class="feather feather-home">
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>        events <span style="color:#f92672">=</span> []
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#39;search_results.html&#39;</span>, events<span style="color:#f92672">=</span>events, query<span style="color:#f92672">=</span>query)
-</span></span></code></pre></div><h3 id="step-2-create-search-form">Step 2: Create Search Form</h3>
+</span></span></code></pre></div><h3 id="step-2-register-the-new-route-in-the-flask-app-1">Step 2: Register the new route in the flask app</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># In app/__init__.py</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_app</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... (previous code remains the same)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># just add this line</span>
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>add_url_rule(<span style="color:#e6db74">&#39;/search&#39;</span>, <span style="color:#e6db74">&#39;search_events&#39;</span>, routes<span style="color:#f92672">.</span>search_events, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> app
+</span></span></code></pre></div><h3 id="step-3-create-search-form">Step 3: Create Search Form</h3>
 <p>Add a search form to your base template:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- In app/templates/base.html --&gt;</span>
 </span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ url_for(&#39;search_events&#39;) }}&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;get&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;query&#34;</span> <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Search events...&#34;</span>&gt;
 </span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Search&lt;/<span style="color:#f92672">button</span>&gt;
 </span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
-</span></span></code></pre></div><h3 id="step-3-create-search-results-template">Step 3: Create Search Results Template</h3>
+</span></span></code></pre></div><h3 id="step-4-create-search-results-template">Step 4: Create Search Results Template</h3>
 <p>Create a new template to display search results:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!-- In app/templates/search_results.html --&gt;</span>
 </span></span><span style="display:flex;"><span>{% extends &#34;base.html&#34; %}
